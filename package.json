@@ -1,0 +1,13 @@
+{
+    "name": "personnel-svc",
+    "version": "0.0.1",
+    "description": "Personnel service",
+    "author": "Martin Hula <npm@anaworld.cz>",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js"
+    },
+    "dependencies": {
+        "express": "^4.16.1"
+    }
+}
