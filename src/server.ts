@@ -29,6 +29,8 @@ server.get('/', (request: Request, response: Response) => {
     response.json({ message: 'Hello World!' });
 });
 
-server.listen(config.port, config.host, () => {
-    console.log(`Server up on http://${config.host}:${config.port}`);
-});
+export const startServer = () => {
+    server.listen(config.port, config.host, () => {
+        console.log(`Server up on http://${config.host}:${config.port}`);
+    });
+}
