@@ -9,7 +9,7 @@
     "scripts": {
         "build": "tsc",
         "start": "node lib/index.js",
-        "test": "mocha test/* --reporter spec"
+        "test": "tsc && mocha lib/tests/**/*.js --reporter spec"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.30",
@@ -25,6 +25,7 @@
         "typescript": "^3.8.3"
     },
     "dependencies": {
+        "@types/mocha": "^7.0.2",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "eureka-js-client": "^4.5.0",
