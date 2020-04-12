@@ -8,6 +8,7 @@ import * as express from 'express';
 import config, { corsOptions } from './config/server';
 
 import addAccountAPI from './api/account';
+import addAuthorizationAPI from './api/auth';
 import addDoctorAPI from './api/doctor';
 import addSalaryAPI from './api/salary';
 import addSwaggerAPI from './api/swagger';
@@ -19,6 +20,7 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 addAccountAPI(server);
+addAuthorizationAPI(server);
 addDoctorAPI(server);
 addSalaryAPI(server);
 addSwaggerAPI(server);

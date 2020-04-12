@@ -10,10 +10,6 @@ export default (sequelize: Sequelize) => sequelize.define('Account', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password_salt: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     email: {
         type: DataTypes.STRING,
         allowNull: false
