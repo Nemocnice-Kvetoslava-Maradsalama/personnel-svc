@@ -20,6 +20,6 @@ export default (sequelize: Sequelize) => sequelize.define('Account', {
     },
     last_login: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
 }, {});

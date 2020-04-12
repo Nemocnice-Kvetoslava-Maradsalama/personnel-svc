@@ -9,5 +9,9 @@ export default (sequelize: Sequelize) => sequelize.define('Doctor', {
     lastname: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    salary: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {});
