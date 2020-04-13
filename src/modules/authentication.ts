@@ -17,4 +17,13 @@ export class AuthenticationModule {
         return { "access_token": accessToken, "expires_in":  expiresIn };
     }
 
+    public static async validateToken (token: string): Promise<boolean> {
+        try {
+            jwt.verify(token, SECRET_KEY);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
 }
