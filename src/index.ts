@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { startEurekaClient } from './eureka';
 import { startServer } from './server';
 

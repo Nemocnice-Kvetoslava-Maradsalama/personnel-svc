@@ -1,5 +1,4 @@
 import { injectable, inject } from "inversify";
-import "reflect-metadata";
 
 import { AccountModel } from '../models/account';
 import { Bcrypt, TYPES, Jwt } from '../types';
