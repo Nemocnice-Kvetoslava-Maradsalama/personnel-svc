@@ -1,12 +1,18 @@
-import { DoctorModule } from './doctor'
+import { injectable, inject } from "inversify";
+import "reflect-metadata";
+
+import { DoctorModel } from '../models/doctor'
 import { PatientService } from '../services/patient';
 
+@injectable()
 export class SalaryModule {
-    static perPatientBonus: number = 2500;
+    private perPatientBonus: number = 2500;
 
-    public static async calculateSalary (doctorId: string): Promise<number> {
-        const baseSalary = await DoctorModule.getBaseSalary(doctorId);
-        const numberOfPatients = await PatientService.getNumberOfPatients(doctorId);
-        return baseSalary + numberOfPatients * SalaryModule.perPatientBonus;
+    constructor (@inject(DoctorModel) private doctor: DoctorModel, @inject(PatientService) private patientService: PatientService) {}
+
+    public async calculateSalary (doctorId: string): Promise<number> {
+        const baseSalary = await this.doctor.getBaseSalary(doctorId);
+        const numberOfPatients = await this.patientService.getNumberOfPatients(doctorId);
+        return baseSalary + numberOfPatients * this.perPatientBonus;
     }
 }

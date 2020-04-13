@@ -1,6 +1,10 @@
+import { injectable } from "inversify";
+import "reflect-metadata";
+
+@injectable()
 export class PatientService {
 
-    public static async getNumberOfPatients (doctorId: string): Promise<number> {
+    public async getNumberOfPatients (doctorId: string): Promise<number> {
         return Promise.resolve(15);
     }
     

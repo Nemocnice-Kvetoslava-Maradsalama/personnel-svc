@@ -25,15 +25,18 @@
         "typescript": "^3.8.3"
     },
     "dependencies": {
+        "@types/jsonwebtoken": "^8.3.9",
         "@types/mocha": "^7.0.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "eureka-js-client": "^4.5.0",
         "express": "^4.16.1",
+        "inversify": "^5.0.1",
         "jsonwebtoken": "^8.5.1",
         "pg": "^7.18.2",
         "pg-hstore": "^2.3.3",
+        "reflect-metadata": "^0.1.13",
         "sequelize": "^5.21.5",
         "swagger-ui-express": "^4.1.4"
     },
