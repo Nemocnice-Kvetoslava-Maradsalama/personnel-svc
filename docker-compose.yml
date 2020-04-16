@@ -13,6 +13,7 @@ services:
       - 8701:8701
     networks:
       - postgres
+      - nemocnice-network
   postgres:
     container_name: postgres_container
     image: postgres
@@ -44,6 +45,9 @@ services:
 networks:
   postgres:
     driver: bridge
+  nemocnice-network:
+    external:
+      name: nemocnice-network
 volumes:
   postgres:
   pgadmin:

@@ -1,8 +1,11 @@
 import { Secret, SignOptions, VerifyOptions } from 'jsonwebtoken';
+import { Response, RequestInfo, RequestInit } from 'node-fetch';
 
 export interface Bcrypt {
     compare (value: string, compareWith: string): Promise<boolean>;
 }
+
+export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
 
 export interface Jwt {
     sign (payload: string | Buffer | object, secretOrPrivateKey: Secret, options?: SignOptions ): string;
@@ -11,7 +14,9 @@ export interface Jwt {
 
 const TYPES = {
     Bcrypt: Symbol.for('Bcrypt'),
-    Jwt: Symbol.for('Jwt')
+    Fetch: Symbol.for('Fetch'),
+    Jwt: Symbol.for('Jwt'),
+    Eureka: Symbol.for('Eureka')
 };
 
 export { TYPES };
