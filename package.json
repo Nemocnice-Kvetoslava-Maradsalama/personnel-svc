@@ -9,7 +9,8 @@
     "scripts": {
         "build": "tsc",
         "start": "node lib/index.js",
-        "test": "tsc && mocha lib/tests/**/*.js --reporter spec"
+        "test": "tsc && mocha lib/tests/**/*.js --reporter spec",
+        "exec": "npm run build && docker-compose build && docker-compose up"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.30",

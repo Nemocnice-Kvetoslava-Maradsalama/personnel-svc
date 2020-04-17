@@ -1,51 +1,384 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "This is a personnel service.",
-      "version": "0.0.1",
-      "title": "Personnel Service",
-      "contact": {
-        "email": "hulamart@fel.cvut.cz"
-      }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Personnel Service",
+    "description": "This is a personnel service.",
+    "contact": {
+      "email": "hulamart@fel.cvut.cz"
     },
-    "host": "localhost",
-    "basePath": "/",
-    "externalDocs": {
-      "description": "Github",
-      "url": "https://github.com/Nemocnice-Kvetoslava-Maradsalama"
+    "version": "0.0.1"
+  },
+  "externalDocs": {
+    "description": "Github",
+    "url": "https://github.com/Nemocnice-Kvetoslava-Maradsalama"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization API"
     },
-    "schemes": [
-      "http"
-    ],
-    "tags": [
-      {
-        "name": "Account",
-        "description": "User accounts",
-        "externalDocs": {
-          "description": "Find out more",
-          "url": "http://swagger.io"
+    {
+      "name": "Account",
+      "description": "User accounts"
+    },
+    {
+      "name": "Doctor",
+      "description": "Doctor accounts"
+    }
+  ],
+  "paths": {
+    "/accounts": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "List all accounts",
+        "operationId": "listAcocunts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
         }
       }
-    ],
-    "definitions": {
+    },
+    "/account/:id": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get account by id",
+        "operationId": "getAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Account Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Update account",
+        "operationId": "updateAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Account Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Account",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "Account"
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Delete account",
+        "operationId": "deleteAccount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Account Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/account": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create account",
+        "operationId": "createAccount",
+        "requestBody": {
+          "description": "Account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "Account"
+      }
+    },
+    "/doctors": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "List all doctors",
+        "operationId": "listDoctors",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/doctor/:id": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "Get doctor by id",
+        "operationId": "getDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Doctor Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "Update doctor",
+        "operationId": "updateDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Doctor Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Doctor",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Doctor"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "Doctor"
+      },
+      "delete": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "Delete doctor",
+        "operationId": "deleteDoctor",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Doctor Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/doctor": {
+      "post": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "Create doctor",
+        "operationId": "createDoctor",
+        "requestBody": {
+          "description": "Doctor",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Doctor"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "Doctor"
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User Login",
+        "operationId": "userLogin",
+        "requestBody": {
+          "description": "Doctor Id",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "Login"
+      }
+    },
+    "/auth/validate-token": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Validate Token",
+        "operationId": "validateToken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/validate-doctor": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Validate Doctor",
+        "operationId": "validateDoctor",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
       "Account": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
           "username": {
             "type": "string"
           },
           "password": {
             "type": "string"
           },
-          "password_salt": {
-            "type": "string"
-          },
           "email": {
             "type": "string"
+          },
+          "DoctorId": {
+            "type": "integer"
           }
         },
         "xml": {
@@ -55,63 +388,34 @@
       "Doctor": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
           "firstname": {
             "type": "string"
           },
           "lastname": {
             "type": "string"
+          },
+          "salary": {
+            "type": "integer"
           }
         },
         "xml": {
           "name": "Doctor"
         }
       },
-      "Nurse": {
+      "Login": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "firstname": {
+          "username": {
             "type": "string"
           },
-          "lastname": {
+          "password": {
             "type": "string"
           }
         },
         "xml": {
-          "name": "Nurse"
-        }
-      }
-    },
-    "paths": {
-      "/accounts": {
-        "get": {
-          "tags": [
-            "Account"
-          ],
-          "summary": "List all accounts",
-          "description": "",
-          "operationId": "listAcocunts",
-          "consumes": [
-            "application/json",
-            "application/xml"
-          ],
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "responses": {
-            "405": {
-              "description": "Invalid input"
-            }
-          }
+          "name": "Login"
         }
       }
     }
   }
+}

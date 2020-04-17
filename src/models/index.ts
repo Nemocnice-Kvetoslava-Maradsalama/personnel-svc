@@ -17,11 +17,12 @@ const sequelize = new Sequelize(dbconfig.database, dbconfig.user, dbconfig.passw
 
 const Account: any = defineAccount(sequelize);
 const Doctor: any = defineDoctor(sequelize);
+Account.belongsTo(Doctor);
 
 sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
-    accounts.forEach((account) => Account.create(account));
     doctors.forEach((doctor) => Doctor.create(doctor));
+    accounts.forEach((account) => Account.create(account));
 });
 
 export { Account, Doctor };

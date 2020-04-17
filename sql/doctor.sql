@@ -1,7 +1,6 @@
 CREATE TABLE doctor(
-   doctor_id serial PRIMARY KEY,
+   id serial PRIMARY KEY,
    firstname VARCHAR (50) NOT NULL,
    lastname VARCHAR (50) NOT NULL,
-   salary INT NOT NULL,
-   created_on TIMESTAMP NOT NULL
+   salary INT NOT NULL
 );

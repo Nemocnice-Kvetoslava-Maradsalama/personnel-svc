@@ -1,4 +1,4 @@
-import { Secret, SignOptions, VerifyOptions } from 'jsonwebtoken';
+import { DecodeOptions, Secret, SignOptions, VerifyOptions } from 'jsonwebtoken';
 import { Response, RequestInfo, RequestInit } from 'node-fetch';
 
 export interface Bcrypt {
@@ -8,8 +8,9 @@ export interface Bcrypt {
 export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
 
 export interface Jwt {
+    decode (token: string, options?: DecodeOptions): null | { [key: string]: any } | string;
     sign (payload: string | Buffer | object, secretOrPrivateKey: Secret, options?: SignOptions ): string;
-    verify (token: string, secretOrPublicKey: Secret, options?: VerifyOptions): object | string
+    verify (token: string, secretOrPublicKey: Secret, options?: VerifyOptions): object | string;
 }
 
 const TYPES = {

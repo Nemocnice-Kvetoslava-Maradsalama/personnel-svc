@@ -1,8 +1,10 @@
 export interface Account {
+    id?: string;
     username: string;
     password: string;
     email: string;
     last_login?: Date;
+    DoctorId?: number;
 }
 
 export interface Doctor {

@@ -15,16 +15,56 @@ export class AuthenticationModule {
         if (!account) {
             throw 'no record';
         }
-        const isValid = await this.bcrypt.compare(password, account[0].password);
+        const isValid = await this.bcrypt.compare(password, account.password);
         if (!isValid) {
             throw 'invalid password';
         }
         const expiresIn = 24 * 60 * 60;
-        const accessToken = this.jwt.sign({ id: account[0].id }, SECRET_KEY, { expiresIn });
+        const accessToken = this.jwt.sign({ id: account.id }, SECRET_KEY, { expiresIn });
         return { "access_token": accessToken, "expires_in":  expiresIn };
     }
 
-    public async validateToken (token: string): Promise<boolean> {
+    public async validate (authorizationHeader: string | undefined): Promise<boolean> {
+        if (!authorizationHeader) {
+            return false;
+        }
+        const token = this.getTokenFromAuthorizationHeader(authorizationHeader);
+        if (token) {
+            return this.validateToken(token);
+        } else {
+            return false;
+        }
+    }
+
+    public async validateDoctor (authorizationHeader: string | undefined): Promise<boolean> {
+        if (!authorizationHeader) {
+            return false;
+        }
+        const token = this.getTokenFromAuthorizationHeader(authorizationHeader);
+        if (token && this.validateToken(token)) {
+            const decoded = this.jwt.decode(token);
+            if (decoded) {
+                const accountId = decoded['id'];
+                const account = await this.account.getAccountById(accountId);
+                return account.DoctorId !== null;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private getTokenFromAuthorizationHeader (authorizationHeader: string): string | null {
+        const match = authorizationHeader.match(/Bearer (.*)/);
+        if (match && match.length > 0) {
+            return match[1];
+        } else {
+            return null;
+        }
+    }
+
+    private async validateToken (token: string): Promise<boolean> {
         try {
             this.jwt.verify(token, SECRET_KEY);
             return true;

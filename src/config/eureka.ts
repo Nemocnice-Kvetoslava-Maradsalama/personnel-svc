@@ -19,7 +19,7 @@ export default {
         fetchRegistry: true
     },
     eureka: {
-        host: '172.20.0.2',
+        host: '172.24.0.2',
         port: 8761,
         servicePath: '/eureka/apps',
     },
