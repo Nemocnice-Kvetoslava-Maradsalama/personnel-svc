@@ -3,6 +3,13 @@ services:
   server:
     build: .
     environment:
+      SERVER_IP: 127.0.0.1
+      SERVER_HOSTNAME: localhost
+      SERVER_PORT: 8701
+      EUREKA_APP: personnel-svc
+      EUREKA_ID: personnel-one
+      EUREKA_HOST: 172.24.0.2
+      EUREKA_PORT: 8761
       PGHOST: postgres_container
       PGPASSWORD: secretpassword
       PGDATABASE: mydb

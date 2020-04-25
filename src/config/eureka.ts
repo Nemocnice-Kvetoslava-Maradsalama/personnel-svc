@@ -1,13 +1,14 @@
 import { EurekaClient } from 'eureka-js-client';
+import * as env from 'env-var';
 
 export default {
     instance: {
-        app: 'personnel-svc',
-        instanceId: 'one',
-        hostName: 'localhost',
-        ipAddr: '127.0.0.1',
+        app: env.get('EUREKA_APP').default('personnel-svc').asString(),
+        instanceId: env.get('EUREKA_ID').default('personnel-one').asString(),
+        hostName: env.get('SERVER_HOSTNAME').default('localhost').asString(),
+        ipAddr: env.get('SERVER_IP').default('127.0.0.1').asString(),
         port: {
-            '$': 8701,
+            '$': env.get('SERVER_PORT').default(8701).asPortNumber(),
             '@enabled': true,
         },
         vipAddress: 'personnel-svc',
@@ -19,8 +20,8 @@ export default {
         fetchRegistry: true
     },
     eureka: {
-        host: '172.24.0.2',
-        port: 8761,
+        host: env.get('EUREKA_HOST').default('172.24.0.2').asString(),
+        port: env.get('EUREKA_PORT').default(8761).asPortNumber(),
         servicePath: '/eureka/apps',
     },
 }
