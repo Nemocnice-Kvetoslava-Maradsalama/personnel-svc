@@ -11,6 +11,7 @@ export interface Doctor {
     firstname: string;
     lastname: string;
     salary: number;
+    drugLevel: number;
 }
 
 const TYPES = {

@@ -261,6 +261,32 @@
         }
       }
     },
+    "/doctor/:id/drug-level": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "summary": "Get doctor drug level by id",
+        "operationId": "getDoctorDrugLevel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Doctor Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
     "/doctor": {
       "post": {
         "tags": [

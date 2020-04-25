@@ -15,12 +15,12 @@ export class DoctorModel {
         return this.model.findByPk(doctorId);
     }
 
-    public async addDoctor (firstname: string, lastname: string, salary: number): Promise<Doctor> {
-        return this.model.create({ firstname, lastname, salary });
+    public async addDoctor (firstname: string, lastname: string, salary: number, drugLevel: number): Promise<Doctor> {
+        return this.model.create({ firstname, lastname, salary, drugLevel });
     }
 
-    public async updateDoctorById (id: string, firstname: string, lastname: string, salary: number): Promise<Doctor> {
-        return this.model.update({ firstname, lastname, salary }, {
+    public async updateDoctorById (id: string, firstname: string, lastname: string, salary: number, drugLevel: number): Promise<Doctor> {
+        return this.model.update({ firstname, lastname, salary, drugLevel }, {
             where: { id }
         });
     }
@@ -33,6 +33,10 @@ export class DoctorModel {
 
     public async getBaseSalary (doctorId: string): Promise<number> {
         return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor.salary);
+    }
+
+    public async getDrugLevel (doctorId: string): Promise<number> {
+        return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor.drugLevel);
     }
 
 }

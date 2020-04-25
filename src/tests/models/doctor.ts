@@ -42,9 +42,10 @@ describe('DoctorModel', () => {
             const firstname = 'user1';
             const lastname = 'pawd1';
             const salary = 104000;
-            const result = await instance.addDoctor(firstname, lastname, salary);
+            const drugLevel = 1;
+            const result = await instance.addDoctor(firstname, lastname, salary, drugLevel);
             expect(result).to.equal(doctor);
-            expect(model.create.calledWith({ firstname, lastname, salary })).to.be.true;
+            expect(model.create.calledWith({ firstname, lastname, salary, drugLevel })).to.be.true;
         });
     });
     describe('updateDoctorById', () => {
@@ -57,9 +58,10 @@ describe('DoctorModel', () => {
             const firstname = 'user1';
             const lastname = 'pawd1';
             const salary = 104000;
-            const result = await instance.updateDoctorById(id, firstname, lastname, salary);
+            const drugLevel = 1;
+            const result = await instance.updateDoctorById(id, firstname, lastname, salary, drugLevel);
             expect(result).to.equal(doctor);
-            expect(model.update.calledWith({ firstname, lastname, salary }, { where: { id } })).to.be.true;
+            expect(model.update.calledWith({ firstname, lastname, salary, drugLevel }, { where: { id } })).to.be.true;
         });
     });
     describe('deleteDoctor', () => {

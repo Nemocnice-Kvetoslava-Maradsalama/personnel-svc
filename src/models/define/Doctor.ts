@@ -13,5 +13,9 @@ export default (sequelize: Sequelize) => sequelize.define('Doctor', {
     salary: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    drugLevel: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {});
