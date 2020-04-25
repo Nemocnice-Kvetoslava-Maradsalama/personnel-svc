@@ -7,6 +7,8 @@ import * as express from 'express';
 
 import config, { corsOptions } from './config/server';
 
+import loggerMiddleware from './middleware/logger';
+
 import addAccountAPI from './api/account';
 import addAuthorizationAPI from './api/auth';
 import addDoctorAPI from './api/doctor';
@@ -20,6 +22,7 @@ const server = express();
 server.use(cors(corsOptions));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
+server.use(loggerMiddleware);
 
 addAccountAPI(server, instances.accountModel);
 addAuthorizationAPI(server, instances.authenticationModule);

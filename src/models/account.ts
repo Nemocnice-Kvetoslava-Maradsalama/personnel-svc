@@ -1,11 +1,12 @@
 import { injectable, inject } from 'inversify';
 import { SequelizeModel } from './types';
 import { Account, TYPES } from './define/types';
+import { LoggerService } from '../services/logger';
 
 @injectable()
 export class AccountModel {
 
-    constructor (@inject(TYPES.AccountSequelizeModel) private model: SequelizeModel<Account>) {}
+    constructor (@inject(TYPES.AccountSequelizeModel) private model: SequelizeModel<Account>, @inject(LoggerService) private loggerService: LoggerService) {}
 
     public async getAllAccounts (): Promise<any> {
         return this.model.findAll();
@@ -22,6 +23,7 @@ export class AccountModel {
         if (result && result.length) {
             return result[0];
         } else {
+            this.loggerService.warn('AccountModel/getAccountByUsername - username does not exist');
             return null;
         }
     }

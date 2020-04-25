@@ -2,21 +2,24 @@ import { injectable, inject } from "inversify";
 
 import { AccountModel } from '../models/account';
 import { Bcrypt, TYPES, Jwt } from '../types';
+import { LoggerService } from '../services/logger';
 
 const SECRET_KEY = "secretkey1234";
 
 @injectable()
 export class AuthenticationModule {
 
-    constructor (@inject(TYPES.Bcrypt) private bcrypt: Bcrypt, @inject(TYPES.Jwt) private jwt: Jwt, @inject(AccountModel) private account: AccountModel) {}
+    constructor (@inject(TYPES.Bcrypt) private bcrypt: Bcrypt, @inject(TYPES.Jwt) private jwt: Jwt, @inject(AccountModel) private account: AccountModel, @inject(LoggerService) private loggerService: LoggerService) {}
     
     public async login (username: string, password: string): Promise<any> {
         const account = await this.account.getAccountByUsername(username);
         if (!account) {
+            this.loggerService.error('AuthenticationModule/login - no account with username ' + username);
             throw 'no record';
         }
         const isValid = await this.bcrypt.compare(password, account.password);
         if (!isValid) {
+            this.loggerService.error('AuthenticationModule/login - invalid password');
             throw 'invalid password';
         }
         const expiresIn = 24 * 60 * 60;
@@ -26,6 +29,7 @@ export class AuthenticationModule {
 
     public async validate (authorizationHeader: string | undefined): Promise<boolean> {
         if (!authorizationHeader) {
+            this.loggerService.warn('AuthenticationModule/validate - missing authorization header');
             return false;
         }
         const token = this.getTokenFromAuthorizationHeader(authorizationHeader);
@@ -60,6 +64,7 @@ export class AuthenticationModule {
         if (match && match.length > 0) {
             return match[1];
         } else {
+            this.loggerService.warn('AuthenticationModule/getTokenFromAuthorizationHeader - cannot parse token from authorization header');
             return null;
         }
     }
@@ -69,6 +74,7 @@ export class AuthenticationModule {
             this.jwt.verify(token, SECRET_KEY);
             return true;
         } catch (error) {
+            this.loggerService.warn('AuthenticationModule/validateToken - invalid token');
             return false;
         }
     }

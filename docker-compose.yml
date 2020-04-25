@@ -3,6 +3,7 @@ services:
   server:
     build: .
     environment:
+      LOGLEVEL: 1 # 0 - OFF, 1 - ERROR, 2 - DEBUG
       SERVER_IP: 127.0.0.1
       SERVER_HOSTNAME: localhost
       SERVER_PORT: 8701

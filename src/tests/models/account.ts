@@ -4,7 +4,7 @@ import * as sinon from 'sinon';
 import { AccountModel } from '../../models/account';
 
 describe('AccountModel', () => {
-    let instance: AccountModel, model;
+    let instance: AccountModel, model, logger;
     beforeEach(() => {
         model = {
             findAll: sinon.stub(),
@@ -13,7 +13,12 @@ describe('AccountModel', () => {
             update: sinon.stub(),
             destroy: sinon.stub()
         };
-        instance = new AccountModel(model);
+        logger = {
+            log: sinon.stub(),
+            warn: sinon.stub(),
+            error: sinon.stub(),
+        };
+        instance = new AccountModel(model, logger);
     });
     describe('getAllAccounts', () => {
         it('', async () => {

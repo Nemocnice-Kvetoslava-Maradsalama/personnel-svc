@@ -13,11 +13,24 @@ export interface Jwt {
     verify (token: string, secretOrPublicKey: Secret, options?: VerifyOptions): object | string;
 }
 
+export type Config = {
+    port: number;
+    host: string;
+    logLevel: LOGLEVEL;
+}
+
 const TYPES = {
     Bcrypt: Symbol.for('Bcrypt'),
     Fetch: Symbol.for('Fetch'),
     Jwt: Symbol.for('Jwt'),
-    Eureka: Symbol.for('Eureka')
+    Eureka: Symbol.for('Eureka'),
+    Config: Symbol.for('Config')
 };
 
 export { TYPES };
+
+export enum LOGLEVEL {
+    OFF,
+    ERROR,
+    DEBUG
+}

@@ -1,6 +1,7 @@
 import { Container } from "inversify";
-import { TYPES, Bcrypt, Jwt, Fetch } from "./types";
+import { TYPES, Bcrypt, Jwt, Fetch, Config } from "./types";
 import { TYPES as modelTypes, Account, Doctor } from './models/define/types';
+import config from './config/server';
 
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
@@ -17,10 +18,13 @@ import { instantiateEurekaClient } from './eureka';
 import { Eureka } from 'eureka-js-client';
 import { RequestService } from './services/request';
 import { EurekaService } from './services/eureka';
+import { LoggerService } from './services/logger';
 
 const eurekaClient = instantiateEurekaClient();
 
 const myContainer = new Container();
+myContainer.bind<Config>(TYPES.Config).toConstantValue(config);
+
 myContainer.bind<Bcrypt>(TYPES.Bcrypt).toConstantValue(bcrypt);
 myContainer.bind<Fetch>(TYPES.Fetch).toFunction(fetch);
 myContainer.bind<Jwt>(TYPES.Jwt).toConstantValue(jwt);
@@ -34,6 +38,7 @@ myContainer.bind<DoctorModel>(DoctorModel).toSelf();
 myContainer.bind<AuthenticationModule>(AuthenticationModule).toSelf();
 myContainer.bind<SalaryModule>(SalaryModule).toSelf();
 
+myContainer.bind<LoggerService>(LoggerService).toSelf();
 myContainer.bind<EurekaService>(EurekaService).toSelf();
 myContainer.bind<PatientService>(PatientService).toSelf();
 myContainer.bind<RequestService>(RequestService).toSelf();
