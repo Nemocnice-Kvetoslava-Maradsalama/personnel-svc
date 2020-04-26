@@ -3,8 +3,8 @@ services:
   server:
     build: .
     environment:
-      LOGLEVEL: 1 # 0 - OFF, 1 - ERROR, 2 - DEBUG
-      SERVER_IP: 127.0.0.1
+      LOGLEVEL: 2 # 0 - OFF, 1 - ERROR, 2 - DEBUG
+      # SERVER_IP: 127.0.0.1 # override for network-based auto-detected ip address
       SERVER_HOSTNAME: localhost
       SERVER_PORT: 8701
       EUREKA_APP: personnel-svc
@@ -20,8 +20,8 @@ services:
     ports:
       - 8701:8701
     networks:
-      - postgres
       - nemocnice-network
+      - postgres
   postgres:
     container_name: postgres_container
     image: postgres
@@ -33,8 +33,6 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
-    ports:
-      - 5432:5432
     networks:
       - postgres
   pgadmin:
