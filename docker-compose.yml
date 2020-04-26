@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  server:
+  personnel-svc:
     build: .
     environment:
       LOGLEVEL: 2 # 0 - OFF, 1 - ERROR, 2 - DEBUG
