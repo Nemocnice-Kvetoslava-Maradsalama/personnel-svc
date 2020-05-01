@@ -32,11 +32,11 @@ export class DoctorModel {
     }
 
     public async getBaseSalary (doctorId: string): Promise<number> {
-        return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor.salary);
+        return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor && doctor.salary);
     }
 
     public async getDrugLevel (doctorId: string): Promise<number> {
-        return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor.drugLevel);
+        return this.model.findByPk(doctorId).then((doctor: Doctor) => doctor && doctor.drugLevel);
     }
 
 }

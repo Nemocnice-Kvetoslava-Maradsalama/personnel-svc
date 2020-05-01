@@ -15,12 +15,12 @@ export class AuthenticationModule {
         const account = await this.account.getAccountByUsername(username);
         if (!account) {
             this.loggerService.error('AuthenticationModule/login - no account with username ' + username);
-            throw 'no record';
+            throw 'Invalid username';
         }
         const isValid = await this.bcrypt.compare(password, account.password);
         if (!isValid) {
             this.loggerService.error('AuthenticationModule/login - invalid password');
-            throw 'invalid password';
+            throw 'Invalid password';
         }
         const expiresIn = 24 * 60 * 60;
         const accessToken = this.jwt.sign({ id: account.id }, SECRET_KEY, { expiresIn });

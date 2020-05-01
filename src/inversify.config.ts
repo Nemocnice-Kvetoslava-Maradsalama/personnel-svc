@@ -1,5 +1,5 @@
 import { Container } from "inversify";
-import { TYPES, Bcrypt, Jwt, Fetch, Config } from "./types";
+import { TYPES, Bcrypt, Jwt, Fetch, Config, Logger } from "./types";
 import { TYPES as modelTypes, Account, Doctor } from './models/define/types';
 import config from './config/server';
 
@@ -38,7 +38,7 @@ myContainer.bind<DoctorModel>(DoctorModel).toSelf();
 myContainer.bind<AuthenticationModule>(AuthenticationModule).toSelf();
 myContainer.bind<SalaryModule>(SalaryModule).toSelf();
 
-myContainer.bind<LoggerService>(LoggerService).toSelf();
+myContainer.bind<Logger>(LoggerService).toSelf();
 myContainer.bind<EurekaService>(EurekaService).toSelf();
 myContainer.bind<PatientService>(PatientService).toSelf();
 myContainer.bind<RequestService>(RequestService).toSelf();
@@ -47,5 +47,6 @@ export default {
     accountModel: myContainer.get<AccountModel>(AccountModel),
     doctorModel: myContainer.get<DoctorModel>(DoctorModel),
     authenticationModule: myContainer.get<AuthenticationModule>(AuthenticationModule),
-    salaryModule: myContainer.get<SalaryModule>(SalaryModule)
+    salaryModule: myContainer.get<SalaryModule>(SalaryModule),
+    LoggerService: myContainer.get<Logger>(LoggerService)
 };

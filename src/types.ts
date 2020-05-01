@@ -34,3 +34,9 @@ export enum LOGLEVEL {
     ERROR,
     DEBUG
 }
+
+export interface Logger {
+    log (value: string);
+    warn (value: string);
+    error (value: string);
+}

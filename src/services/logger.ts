@@ -1,8 +1,8 @@
 import { injectable, inject } from "inversify";
-import { TYPES, LOGLEVEL, Config } from '../types';
+import { TYPES, LOGLEVEL, Config, Logger } from '../types';
 
 @injectable()
-export class LoggerService {
+export class LoggerService implements Logger {
 
     constructor (@inject(TYPES.Config) private config: Config) {}
 

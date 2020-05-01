@@ -16,18 +16,4 @@ export class PatientService {
         const json = await response.json();
         return json;
     }
-
-    /*
-    public async getNumberOfPatients (doctorId: string): Promise<number> {
-        let url = 'http://172.20.0.4:8080/';//this.eurekaService.getServiceInstanceUrl(this.appId);
-        url += 'patient/list'
-        console.log('!!!!service url: ', url);
-        const response = await this.requestService.get(url);
-        const json = await response.json();
-        console.log('!!!!result body', response);
-        console.log('!!!!result body', json);
-        console.log('!!!!result body', json[0].firstName);
-        return 0;
-    }
-    */
 }
