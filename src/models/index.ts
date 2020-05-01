@@ -21,8 +21,10 @@ Account.belongsTo(Doctor);
 
 sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
-    doctors.forEach((doctor) => Doctor.create(doctor));
-    accounts.forEach((account) => Account.create(account));
+    const promises = doctors.map((doctor) => Doctor.create(doctor));
+    Promise.all(promises).then(() => {
+        accounts.forEach((account) => Account.create(account));
+    });
 });
 
 export { Account, Doctor };
