@@ -6,7 +6,7 @@ const host = '0.0.0.0';
 const logLevel = env.get('LOGLEVEL').default(LOGLEVEL.DEBUG).asInt();
 
 export const corsOptions = {
-    origin: `http://${host}:${port}`
+    origin: '*'//'`http://${host}:${port}`
 };
 
 export default {
