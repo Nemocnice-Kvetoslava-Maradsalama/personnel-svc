@@ -29,6 +29,10 @@
     {
       "name": "Doctor",
       "description": "Doctor accounts"
+    },
+    {
+      "name": "Salary",
+      "description": "Salary calculation"
     }
   ],
   "paths": {
@@ -373,6 +377,21 @@
         ],
         "summary": "Validate Doctor",
         "operationId": "validateDoctor",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/salary/:doctor_id": {
+      "get": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "Get total salary for doctor",
+        "operationId": "doctorSalary",
         "responses": {
           "200": {
             "description": "OK",
