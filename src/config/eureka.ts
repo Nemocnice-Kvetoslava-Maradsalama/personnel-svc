@@ -6,7 +6,7 @@ import * as os from 'os';
 const getNetworkIPAddress = (): string => {
     const interfaces = os.networkInterfaces();
     const eth0Interfaces = interfaces['eth0'];
-    if (eth0Interfaces.length > 0) {
+    if (eth0Interfaces && eth0Interfaces.length > 0) {
         return eth0Interfaces[0].address;
     } else {
         return '127.0.0.1';

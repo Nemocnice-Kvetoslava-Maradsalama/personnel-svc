@@ -1,5 +1,4 @@
 import { Eureka } from 'eureka-js-client';
-
 import eurekaConfig from './config/eureka';
 
 export const instantiateEurekaClient = (): Eureka => {

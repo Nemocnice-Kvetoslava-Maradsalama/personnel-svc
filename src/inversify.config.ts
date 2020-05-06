@@ -3,6 +3,7 @@ import { TYPES, Bcrypt, Jwt, Fetch, Config, Logger } from "./types";
 import { TYPES as modelTypes, Account, Doctor } from './models/define/types';
 import config from './config/server';
 
+import * as env from 'env-var';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
@@ -20,15 +21,18 @@ import { RequestService } from './services/request';
 import { EurekaService } from './services/eureka';
 import { LoggerService } from './services/logger';
 
-const eurekaClient = instantiateEurekaClient();
-
-const myContainer = new Container();
+export const myContainer = new Container();
 myContainer.bind<Config>(TYPES.Config).toConstantValue(config);
 
 myContainer.bind<Bcrypt>(TYPES.Bcrypt).toConstantValue(bcrypt);
 myContainer.bind<Fetch>(TYPES.Fetch).toFunction(fetch);
 myContainer.bind<Jwt>(TYPES.Jwt).toConstantValue(jwt);
-myContainer.bind<Eureka>(TYPES.Eureka).toConstantValue(eurekaClient);
+
+console.log(env.get('NODE_ENV').asString());
+if (env.get('NODE_ENV').asString() != 'test') {
+    const eurekaClient = instantiateEurekaClient();
+    myContainer.bind<Eureka>(TYPES.Eureka).toConstantValue(eurekaClient);
+}
 
 myContainer.bind<SequelizeModel<Account>>(modelTypes.AccountSequelizeModel).toConstantValue(accountSequelizeModel);
 myContainer.bind<SequelizeModel<Doctor>>(modelTypes.DoctorSequelizeModel).toConstantValue(doctorSequelizeModel);
@@ -43,10 +47,10 @@ myContainer.bind<EurekaService>(EurekaService).toSelf();
 myContainer.bind<PatientService>(PatientService).toSelf();
 myContainer.bind<RequestService>(RequestService).toSelf();
 
-export default { 
+export default () => ({ 
     accountModel: myContainer.get<AccountModel>(AccountModel),
     doctorModel: myContainer.get<DoctorModel>(DoctorModel),
     authenticationModule: myContainer.get<AuthenticationModule>(AuthenticationModule),
     salaryModule: myContainer.get<SalaryModule>(SalaryModule),
     LoggerService: myContainer.get<Logger>(LoggerService)
-};
+});

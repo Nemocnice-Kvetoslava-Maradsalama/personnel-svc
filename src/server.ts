@@ -15,8 +15,9 @@ import addDoctorAPI from './api/doctor';
 import addSalaryAPI from './api/salary';
 import addSwaggerAPI from './api/swagger';
 
-import instances from './inversify.config';
+import buildInstances from './inversify.config';
 
+const instances = buildInstances();
 const server = express();
 
 server.use(cors(corsOptions));
