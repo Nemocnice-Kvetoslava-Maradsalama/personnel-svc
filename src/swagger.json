@@ -390,6 +390,11 @@
         "tags": [
           "Salary"
         ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "summary": "Get total salary for doctor",
         "operationId": "doctorSalary",
         "responses": {

@@ -28,7 +28,7 @@ export default (server: express.Application, logger: Logger, account: AccountMod
             return;
         }
         return account.addAccount(username, password, email)
-            .then((result: any) => response.json(result))
+            .then((result: any) => response.status(201).json(result))
             .catch((error: string) => {
                 logger.error(error);
                 response.status(500).send('Something broke!');
@@ -42,7 +42,7 @@ export default (server: express.Application, logger: Logger, account: AccountMod
             return;
         }
         return account.updateAccountById(request.params.id, username, password, email)
-            .then((result: any) => response.json(result))
+            .then((result: any) => response.status(201).json(result))
             .catch((error: string) => {
                 logger.error(error);
                 response.status(500).send('Something broke!');

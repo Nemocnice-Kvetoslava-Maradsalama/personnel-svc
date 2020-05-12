@@ -36,7 +36,7 @@ export default (server: express.Application, logger: Logger, doctor: DoctorModel
             return;
         }
         return doctor.addDoctor(firstname, lastname, salary, drugLevel)
-            .then((result: any) => response.json(result))
+            .then((result: any) => response.status(201).json(result))
             .catch((error: string) => {
                 logger.error(error);
                 response.status(500).send('Something broke!');
@@ -50,7 +50,7 @@ export default (server: express.Application, logger: Logger, doctor: DoctorModel
             return;
         }
         return doctor.updateDoctorById(request.params.id, firstname, lastname, salary, drugLevel)
-            .then((result: any) => response.json(result))
+            .then((result: any) => response.status(201).json(result))
             .catch((error: string) => {
                 logger.error(error);
                 response.status(500).send('Something broke!');

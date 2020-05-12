@@ -8,11 +8,11 @@ export class PatientService {
 
     constructor (@inject(RequestService) private requestService: RequestService, @inject(EurekaService) private eurekaService: EurekaService) {}
 
-    public async getNumberOfPatients (doctorId: string): Promise<number> {
+    public async getNumberOfPatients (doctorId: string, authorizationHeader: string): Promise<number> {
         let url = this.eurekaService.getServiceInstanceUrl(this.appId);
         url += 'interaction/doctorInteractionCount?doctorId=' + doctorId;
 
-        const response = await this.requestService.get(url);
+        const response = await this.requestService.get(url, authorizationHeader);
         const json = await response.json();
         return json;
     }

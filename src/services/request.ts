@@ -8,9 +8,24 @@ export class RequestService {
 
     constructor (@inject(TYPES.Fetch) private fetch: Fetch, @inject(LoggerService) private loggerService: LoggerService) {}
 
-    public get (url: string): Promise<Response> {
-        this.loggerService.log(`Outgoing GET request to: ${url}`);
-        return this.fetch(url);
+    public get (url: string, authorizationHeader?: string): Promise<Response> {
+        let options;
+        if (authorizationHeader) {
+            options = {
+                method: 'GET',
+                withCredentials: true,
+                credentials: 'include',
+                headers: {
+                    'Authorization': authorizationHeader,
+                }
+            }
+        } else {
+            options = {
+                method: 'GET',
+            };
+        }
+        this.loggerService.log(`Outgoing GET request to: ${url}, with options: ` + JSON.stringify(options));
+        return this.fetch(url, options);
     }
 
 }

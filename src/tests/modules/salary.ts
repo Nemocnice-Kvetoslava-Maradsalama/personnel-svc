@@ -44,8 +44,9 @@ describe('SalaryModule', () => {
                 
             const doctorBaseSalary = 30000;
             doctorMock.findByPk.returns(Promise.resolve({ salary: doctorBaseSalary }));
+            const authorizationHeader = 'Bearer ASDF';
 
-            const salary = await salaryModule.calculateSalary('' + doctorId);
+            const salary = await salaryModule.calculateSalary('' + doctorId, authorizationHeader);
             expect(salary).to.equal(doctorBaseSalary + perPatientBonus * numberOfPatients);
         });
         it('has no bonus', async () => {
@@ -60,18 +61,20 @@ describe('SalaryModule', () => {
                 
             const doctorBaseSalary = 30000;
             doctorMock.findByPk.returns(Promise.resolve({ salary: doctorBaseSalary }));
+            const authorizationHeader = 'Bearer ASDF';
 
-            const salary = await salaryModule.calculateSalary('' + doctorId);
+            const salary = await salaryModule.calculateSalary('' + doctorId, authorizationHeader);
             expect(salary).to.equal(doctorBaseSalary + perPatientBonus * numberOfPatients);
         });
         it('invalid endpoint', async () => {
             const doctorId = 1;
             const doctorBaseSalary = 30000;
             doctorMock.findByPk.returns(Promise.resolve({ salary: doctorBaseSalary }));
+            const authorizationHeader = 'Bearer ASDF';
 
             let thrownError = false;
             try {
-                await salaryModule.calculateSalary('' + doctorId);
+                await salaryModule.calculateSalary('' + doctorId, authorizationHeader);
             } catch (error) {
                 thrownError = true;
             }

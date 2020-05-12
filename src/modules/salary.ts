@@ -9,9 +9,9 @@ export class SalaryModule {
 
     constructor (@inject(DoctorModel) private doctor: DoctorModel, @inject(PatientService) private patientService: PatientService) {}
 
-    public async calculateSalary (doctorId: string): Promise<number> {
+    public async calculateSalary (doctorId: string, authorizationHeader: string): Promise<number> {
         const baseSalary = await this.doctor.getBaseSalary(doctorId);
-        const numberOfPatients = await this.patientService.getNumberOfPatients(doctorId);
+        const numberOfPatients = await this.patientService.getNumberOfPatients(doctorId, authorizationHeader);
         return baseSalary + numberOfPatients * this.perPatientBonus;
     }
 }

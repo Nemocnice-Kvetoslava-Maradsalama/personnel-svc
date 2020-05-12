@@ -28,7 +28,7 @@ server.use(loggerMiddleware(instances.LoggerService));
 addAccountAPI(server, instances.LoggerService, instances.accountModel);
 addAuthorizationAPI(server, instances.LoggerService, instances.authenticationModule);
 addDoctorAPI(server, instances.LoggerService, instances.doctorModel);
-addSalaryAPI(server, instances.LoggerService, instances.salaryModule);
+addSalaryAPI(server, instances.LoggerService, instances.salaryModule, instances.authenticationModule);
 addSwaggerAPI(server);
 
 server.get('/', (request: Request, response: Response) => {
